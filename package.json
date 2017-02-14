@@ -1,0 +1,42 @@
+{
+  "name": "hipchatredux",
+  "version": "1.0.0",
+  "description": "Hipchat using rx extenstions",
+  "main": "main.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/keithbarrow/hipchatredux.git"
+  },
+  "scripts": {
+    "build-clean": "rm -rf .built && mkdir .built",
+    "build-html": "cp source/web-app/html/index.html .built/",
+    "build-less": "node_modules/.bin/lessc --lint source/web-app/less/main.less && node_modules/.bin/lessc source/web-app/less/main.less .built/css/main.css",
+    "build-js": "node_modules/.bin/webpack --progress --colors --config webpack.config.js",
+    "build-electron":  "cp main.js .built/",
+    "build" : "npm run build-clean && npm run build-html && npm run build-less && npm run build-js && npm run build-electron",
+    "prestart": "npm run build",
+    "start": "electron .built/main.js"
+  },
+  "keywords": [
+    "hipchat",
+    "client",
+    "rx"
+  ],
+  "author": "Keith Barrow",
+  "license": "ISC",
+  "dependencies": {
+    "easyhttp": "^1.0.1",
+    "rxjs": "^5.1.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.22.2",
+    "babel-core": "^6.22.1",
+    "babel-loader": "^6.2.10",
+    "babel-preset-es2015": "^6.22.0",
+    "electron": "^1.4.15",
+    "eslint": "^3.15.0",
+    "eslint-loader": "^1.6.1",
+    "less": "^2.7.2",
+    "webpack": "^2.2.1"
+  }
+}
